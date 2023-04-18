@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+ol li {
+  list-style: none;
+}
+.reviewList {
+  border: 2px solid black;
+  background-color: rgb(202, 156, 95);
+  margin: auto;
+  margin-top: 5px;
+}
+
+.body {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+img {
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.reviewTitle {
+  text-decoration: underline;
+}
