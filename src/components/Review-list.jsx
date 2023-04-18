@@ -4,12 +4,17 @@ import * as api from "../api.js";
 
 export default function ReviewList() {
   const [reviewList, setReviewList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     api.getReviews().then((data) => {
       setReviewList(data.reviews);
+      setIsLoading(false);
     });
   }, []);
+
+  if (isLoading) return <div>Loading reviews...</div>;
 
   return (
     <div>
