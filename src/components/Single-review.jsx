@@ -28,7 +28,6 @@ export default function SingleReview() {
           Posted at: {createdAtString} at {createdAtTimeString}
         </p>
       </section>
-
     </div>
   );
 }

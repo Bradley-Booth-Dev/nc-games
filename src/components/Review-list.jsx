@@ -13,7 +13,7 @@ export default function ReviewList() {
       setReviewList(data.reviews);
       setIsLoading(false);
     });
-  }, []);
+  }, [review_id]);
 
   if (isLoading) return <div>Loading reviews...</div>;
 
@@ -31,7 +31,11 @@ export default function ReviewList() {
               <Link to={`/reviews/${review.review_id}`}>
                 <h3 className="reviewTitle">{review.title}</h3>
                 <p className="user">User: {review.owner}</p>
-                <img className="img" src={review.review_img_url} alt="" />
+                <img
+                  className="img"
+                  src={review.review_img_url}
+                  alt="Image related to the review"
+                />
                 <p className="body">{review.review_body}</p>
                 <p>Votes: {review.votes}</p>
                 <p>Comments: {review.comment_count} </p>
