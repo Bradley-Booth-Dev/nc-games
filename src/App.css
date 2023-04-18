@@ -37,6 +37,10 @@
   }
 }
 
+.headerBar {
+  background-color: yellow;
+}
+
 ol li {
   list-style: none;
 }

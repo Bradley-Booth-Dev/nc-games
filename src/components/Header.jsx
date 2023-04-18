@@ -3,12 +3,12 @@ import Users from "./Users";
 
 export default function Header() {
   return (
-    <div>
+    <div className="headerBar">
       <Link to="/">
-        <h1>NC Games</h1>
+        <h1 className="headerTitle">NC Games</h1>
       </Link>
       <Link to="/reviews">
-        <h1>Reviews</h1>
+        <h1 className="headerReviews">Reviews</h1>
       </Link>
     </div>
   );
