@@ -10,7 +10,7 @@ export default function SingleReview() {
     api.getReview(review_id).then(({ review }) => {
       setSingleReview(review);
     });
-  }, []);
+  }, [review_id]);
   const createdAtDate = new Date(singleReview.created_at);
   const createdAtString = createdAtDate.toLocaleDateString();
   const createdAtTimeString = createdAtDate.toLocaleTimeString();
