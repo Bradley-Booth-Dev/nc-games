@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #499eb6;
 }
 
 @keyframes App-logo-spin {
@@ -38,7 +38,21 @@
 }
 
 .headerBar {
-  background-color: yellow;
+  background-color: rgb(215, 215, 78);
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.headerTitle {
+  text-align: center;
+}
+
+.headerHome,
+.headerReviews {
+  display: inline-block;
+  margin: 10px 30px 0 30px;
 }
 
 ol li {
@@ -56,12 +70,24 @@ ol li {
   margin-right: 10px;
 }
 
-img {
-  width: 500px;
-  height: 300px;
-  object-fit: cover;
+@media screen and (max-width: 768px) {
+  body {
+    width: 80%;
+    overflow-x: hidden;
+  }
+  img {
+    width: 80%;
+    height: auto;
+  }
 }
 
 .reviewTitle {
   text-decoration: underline;
+}
+
+.singleReview {
+  border: 2px solid black;
+  background-color: rgb(202, 156, 95);
+  margin: auto;
+  margin-top: 5px;
 }

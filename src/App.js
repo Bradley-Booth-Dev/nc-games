@@ -7,6 +7,7 @@ import Body from "./components/Body";
 import ReviewList from "./components/Review-list";
 import Users from "./components/Users";
 import Homepage from "./components/Homepage";
+import SingleReview from "./components/Single-review";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/reviews" element={<ReviewList />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/reviews/:review_id" element={<SingleReview />} />
       </Routes>
     </div>
   );

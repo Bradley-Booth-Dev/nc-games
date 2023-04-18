@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import * as api from "../api.js";
+import { Link } from "react-router-dom";
 
 export default function ReviewList() {
   const [reviewList, setReviewList] = useState([]);
@@ -27,15 +28,17 @@ export default function ReviewList() {
 
           return (
             <li className="reviewList" key={review.review_id}>
-              <h3 className="reviewTitle">{review.title}</h3>
-              <p className="user">User: {review.owner}</p>
-              <img className="img" src={review.review_img_url} alt="" />
-              <p className="body">{review.review_body}</p>
-              <p>Votes: {review.votes}</p>
-              <p>Comments: {review.comment_count} </p>
-              <p>
-                Posted at: {createdAtString} at {createdAtTimeString}
-              </p>
+              <Link to={`/reviews/${review.review_id}`}>
+                <h3 className="reviewTitle">{review.title}</h3>
+                <p className="user">User: {review.owner}</p>
+                <img className="img" src={review.review_img_url} alt="" />
+                <p className="body">{review.review_body}</p>
+                <p>Votes: {review.votes}</p>
+                <p>Comments: {review.comment_count} </p>
+                <p>
+                  Posted at: {createdAtString} at {createdAtTimeString}
+                </p>
+              </Link>
             </li>
           );
         })}
