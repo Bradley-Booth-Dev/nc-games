@@ -58,9 +58,6 @@ export default function SingleReview() {
           })}
         </ol>
       </section>
-      <section className="Votes">
-        <button> </button>
-      </section>
     </div>
   );
 }
