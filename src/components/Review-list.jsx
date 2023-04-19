@@ -13,7 +13,7 @@ export default function ReviewList() {
       setReviewList(data.reviews);
       setIsLoading(false);
     });
-  }, [review_id]);
+  }, []);
 
   if (isLoading) return <div>Loading reviews...</div>;
 
