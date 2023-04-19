@@ -35,9 +35,9 @@ export default function SingleReview() {
           Posted at: {createdAtString} at {createdAtTimeString}
         </p>
       </section>
+
       <section className="singleReviewComments">
         <ol>
-          {console.log(comments)}
           Comments:
           {comments.map((comment) => {
             const createdAtDate = new Date(comment.created_at);
@@ -57,6 +57,9 @@ export default function SingleReview() {
             );
           })}
         </ol>
+      </section>
+      <section className="Votes">
+        <button> </button>
       </section>
     </div>
   );
