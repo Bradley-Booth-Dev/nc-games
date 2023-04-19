@@ -7,7 +7,13 @@ export const getReviews = () => {
 };
 
 export const getReview = (review_id) => {
-    return axios
-      .get(`https://nc-games-lua8.onrender.com/api/reviews/${review_id}`)
-      .then((response) => response.data);
-  };
+  return axios
+    .get(`https://nc-games-lua8.onrender.com/api/reviews/${review_id}`)
+    .then((response) => response.data);
+};
+
+export const getComments = (review_id) => {
+  return axios.get(
+    `https://nc-games-lua8.onrender.com/api/reviews/${review_id}/comments`
+  ).then((response) => response.data)
+};
