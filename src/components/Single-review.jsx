@@ -7,6 +7,7 @@ export default function SingleReview() {
   const [singleReview, setSingleReview] = useState({});
   const [comments, setComments] = useState([]);
   const [reviewVotes, setReviewVotes] = useState(0);
+  const [error, setError] = useState(false);
 
   const handleVotes = (review_id, voteChange) => {
     setReviewVotes((currentVotes) => {
@@ -16,6 +17,12 @@ export default function SingleReview() {
       setReviewVotes((currentVotes) => {
         return currentVotes - voteChange;
       });
+      setError(true);
+      {
+        error && (
+          <p>There was an error posting your vote. Please try again later.</p>
+        );
+      }
     });
   };
 
@@ -42,6 +49,9 @@ export default function SingleReview() {
         <p className="user">User: {singleReview.owner}</p>
         <img className="img" src={singleReview.review_img_url} alt="" />
         <p className="body">{singleReview.review_body}</p>
+        {error && (
+          <p>There was an error posting your vote. Please try again later.</p>
+        )}
         <button onClick={() => handleVotes(review_id, 1)}>Upvote</button>
         <button onClick={() => handleVotes(review_id, -1)}>Downvote</button>
         <p>Votes: {singleReview.votes + reviewVotes}</p>
