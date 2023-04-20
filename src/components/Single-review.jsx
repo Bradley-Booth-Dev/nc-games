@@ -6,6 +6,18 @@ export default function SingleReview() {
   const { review_id } = useParams();
   const [singleReview, setSingleReview] = useState({});
   const [comments, setComments] = useState([]);
+  const [reviewVotes, setReviewVotes] = useState(0);
+
+  const handleVotes = (review_id, voteChange) => {
+    setReviewVotes((currentVotes) => {
+      return currentVotes + voteChange;
+    });
+    api.patchVotes(review_id, voteChange).catch(() => {
+      setReviewVotes((currentVotes) => {
+        return currentVotes - voteChange;
+      });
+    });
+  };
 
   useEffect(() => {
     api.getReview(review_id).then(({ review }) => {
@@ -18,6 +30,7 @@ export default function SingleReview() {
       setComments(comments);
     });
   }, [review_id]);
+
   const createdAtDate = new Date(singleReview.created_at);
   const createdAtString = createdAtDate.toLocaleDateString();
   const createdAtTimeString = createdAtDate.toLocaleTimeString();
@@ -29,7 +42,9 @@ export default function SingleReview() {
         <p className="user">User: {singleReview.owner}</p>
         <img className="img" src={singleReview.review_img_url} alt="" />
         <p className="body">{singleReview.review_body}</p>
-        <p>Votes: {singleReview.votes}</p>
+        <button onClick={() => handleVotes(review_id, 1)}>Upvote</button>
+        <button onClick={() => handleVotes(review_id, -1)}>Downvote</button>
+        <p>Votes: {singleReview.votes + reviewVotes}</p>
         <p>Comments: {singleReview.comment_count} </p>
         <p>
           Posted at: {createdAtString} at {createdAtTimeString}
