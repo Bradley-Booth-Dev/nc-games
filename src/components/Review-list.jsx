@@ -30,19 +30,21 @@ export default function ReviewList() {
             <li className="reviewList" key={review.review_id}>
               <Link to={`/reviews/${review.review_id}`}>
                 <h3 className="reviewTitle">{review.title}</h3>
-                <p className="user">User: {review.owner}</p>
+              </Link>
+              <p className="user">User: {review.owner}</p>
+              <Link to={`/reviews/${review.review_id}`}>
                 <img
                   className="img"
                   src={review.review_img_url}
                   alt="Image related to the review"
                 />
-                <p className="body">{review.review_body}</p>
-                <p>Votes: {review.votes}</p>
-                <p>Comments: {review.comment_count} </p>
-                <p>
-                  Posted at: {createdAtString} at {createdAtTimeString}
-                </p>
               </Link>
+              <p className="body">{review.review_body}</p>
+              <p>Votes: {review.votes}</p>
+              <p>Comments: {review.comment_count} </p>
+              <p>
+                Posted at: {createdAtString} at {createdAtTimeString}
+              </p>
             </li>
           );
         })}
