@@ -39,6 +39,7 @@
 
 .headerBar {
   background-color: rgb(215, 215, 78);
+  border: 2px solid black;
 }
 
 a:link {
@@ -58,6 +59,12 @@ a:link {
 ol li {
   list-style: none;
 }
+
+ol {
+  padding: 0;
+  list-style-position: inside;
+}
+
 .reviewList {
   border: 2px solid black;
   background-color: rgb(202, 156, 95);
@@ -72,11 +79,11 @@ ol li {
 
 @media screen and (max-width: 768px) {
   body {
-    width: 80%;
+    width: 100%;
     overflow-x: hidden;
   }
   img {
-    width: 80%;
+    max-width: 80%;
     height: auto;
   }
 }
@@ -89,5 +96,15 @@ ol li {
   border: 2px solid black;
   background-color: rgb(202, 156, 95);
   margin: auto;
+  margin-top: 5px;
+}
+
+.singleReviewComments {
+  margin: auto;
+}
+
+.singleComment {
+  border: 2px solid black;
+  background-color: rgb(202, 156, 95);
   margin-top: 5px;
 }
