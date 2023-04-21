@@ -7,7 +7,10 @@ export default function SingleReview() {
   const [singleReview, setSingleReview] = useState({});
   const [comments, setComments] = useState([]);
   const [reviewVotes, setReviewVotes] = useState(0);
-  const [error, setError] = useState(false);
+  const [voteError, setVoteError] = useState(false);
+  const [commentError, setCommentError] = useState(false);
+  const [commentTimeError, setCommentTimeError] = useState(false);
+  const [newComment, setNewComment] = useState("");
 
   const handleVotes = (review_id, voteChange) => {
     setReviewVotes((currentVotes) => {
@@ -17,13 +20,34 @@ export default function SingleReview() {
       setReviewVotes((currentVotes) => {
         return currentVotes - voteChange;
       });
-      setError(true);
-      {
-        error && (
-          <p>There was an error posting your vote. Please try again later.</p>
-        );
-      }
+      setVoteError(true);
+
+      voteError && (
+        <p>There was an error posting your vote. Please try again later.</p>
+      );
     });
+  };
+
+  const handleComments = (review_id, postedComment) => {
+    const currentTime = new Date().getTime();
+    const lastCommentTime = localStorage.getItem("lastCommentTime");
+    if (lastCommentTime && currentTime - lastCommentTime < 60000) {
+      setCommentTimeError(true);
+      return;
+    }
+    api
+      .postComment(review_id, postedComment)
+      .then(() => {
+        const endTime = new Date().getTime();
+        localStorage.setItem("lastCommentTime", endTime);
+        setNewComment("");
+        api.getComments(review_id).then(({ comments }) => {
+          setComments(comments);
+        });
+      })
+      .catch(() => {
+        setCommentError(true);
+      });
   };
 
   useEffect(() => {
@@ -36,7 +60,7 @@ export default function SingleReview() {
     api.getComments(review_id).then(({ comments }) => {
       setComments(comments);
     });
-  }, [review_id]);
+  }, [comments]);
 
   const createdAtDate = new Date(singleReview.created_at);
   const createdAtString = createdAtDate.toLocaleDateString();
@@ -49,7 +73,8 @@ export default function SingleReview() {
         <p className="user">User: {singleReview.owner}</p>
         <img className="img" src={singleReview.review_img_url} alt="" />
         <p className="body">{singleReview.review_body}</p>
-        {error && (
+
+        {voteError && (
           <p>There was an error posting your vote. Please try again later.</p>
         )}
         <button onClick={() => handleVotes(review_id, 1)}>Upvote</button>
@@ -60,7 +85,24 @@ export default function SingleReview() {
           Posted at: {createdAtString} at {createdAtTimeString}
         </p>
       </section>
+      <section>
+        <label> Add comment:</label>
+        <textarea
+          value={newComment}
+          onChange={(event) => setNewComment(event.target.value)}
+        />
+        {commentTimeError ? (
+          <p>Please wait before posting another comment.</p>
+        ) : commentError ? (
+          <p>
+            There was an error posting your comment. Please try again later.
+          </p>
+        ) : null}
 
+        <button onClick={() => handleComments(review_id, newComment)}>
+          Submit
+        </button>
+      </section>
       <section className="singleReviewComments">
         {comments.length === 0 ? (
           <p>No comments</p>
@@ -76,7 +118,7 @@ export default function SingleReview() {
               return (
                 <li className="singleComment" key={comment_id}>
                   <h4>Username:{comment.author}</h4>
-                  <h5>{comment.body}</h5>
+                  <h5 className="comentBody">{comment.body}</h5>
                   <h6>Votes: {comment.votes}</h6>
                   <h6>
                     Posted at: {createdAtString} at {createdAtTimeString}
