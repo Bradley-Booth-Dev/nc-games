@@ -36,7 +36,7 @@ export default function ReviewList() {
                 <img
                   className="img"
                   src={review.review_img_url}
-                  alt="Image related to the review"
+                  alt="related to the review"
                 />
               </Link>
               <p className="body">{review.review_body}</p>

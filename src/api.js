@@ -19,8 +19,22 @@ export const getComments = (review_id) => {
 };
 
 export const patchVotes = (review_id, voteChange) => {
+  return axios.patch(
+    `https://nc-games-lua8.onrender.com/api/reviews/${review_id}`,
+    {
+      inc_votes: voteChange,
+    }
+  );
+};
+
+export const postComment = (review_id, postedComment) => {
   return axios
-    .patch(`https://nc-games-lua8.onrender.com/api/reviews/${review_id}`, { inc_votes: voteChange,
-    })
-    .then((response) => console.log(response.data));
+    .post(
+      `https://nc-games-lua8.onrender.com/api/reviews/${review_id}/comments`,
+      {
+        username: "tickle122",
+        body: postedComment,
+      }
+    )
+    .then((response) => response.data);
 };

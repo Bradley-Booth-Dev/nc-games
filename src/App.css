@@ -108,3 +108,12 @@ ol {
   background-color: rgb(202, 156, 95);
   margin-top: 5px;
 }
+
+.comentBody {
+  display: block;
+  text-align: center;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 500px;
+  margin: auto;
+}
